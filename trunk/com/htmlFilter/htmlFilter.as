@@ -1,5 +1,6 @@
 package com.htmlFilter
 {
+/*
 #  htmlFilter.as
 #  
 #  Copyright (C) 2008 - Stephen Moore
@@ -18,6 +19,7 @@ package com.htmlFilter
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330,
 #  Boston, MA 02111-1307, USA.
+*/
 
 	public class htmlFilter
 	{
