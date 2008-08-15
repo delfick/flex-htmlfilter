@@ -65,6 +65,10 @@
 				<mx:Button label="reset" click="{Txt = defaultTxt; raw.text = defaultTxt}"/>
 				<mx:Button label="set new text" click="{Txt = raw.text}"/>
 			</mx:HBox>
+			<mx:Spacer height="3"/>
+			<mx:HBox styleName="plain" width="100%">
+				<mx:Text htmlText="Source found at &lt;a href='http://flex-htmlFilter.googlecode.com'&gt;http://flex-htmlFilter.googlecode.com&lt;a/&gt;"/>
+			</mx:HBox>
 		</mx:VBox>
 	
 	</mx:HBox>
