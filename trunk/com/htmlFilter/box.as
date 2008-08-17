@@ -1,9 +1,9 @@
-package com.htmlFilter
-{
+
+
 /*  
 #  box.as
 #  
-#  Copyright (C) 2008 - Stephen Moore
+#  Author : Stephen Moore - delfick755@gmail.com
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package com.htmlFilter
 #  Foundation, Inc., 59 Temple Place, Suite 330,
 #  Boston, MA 02111-1307, USA.
 */
+
+package com.htmlFilter
+{
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	import mx.core.UIComponent;

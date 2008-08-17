@@ -1,9 +1,9 @@
-package com.htmlFilter
-{
+
+
 /*
 #  htmlFilter.as
 #  
-#  Copyright (C) 2008 - Stephen Moore
+#  Author : Stephen Moore - delfick755@gmail.com
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,6 +21,8 @@ package com.htmlFilter
 #  Boston, MA 02111-1307, USA.
 */
 
+package com.htmlFilter
+{
 	public class htmlFilter
 	{
 	
