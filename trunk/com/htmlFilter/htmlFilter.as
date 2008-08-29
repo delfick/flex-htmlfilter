@@ -49,7 +49,8 @@ package com.htmlFilter
 			var htmlTag:RegExp = new RegExp("<(?P<tag>[^<>]*)>", "g");
 			theData =  theData.replace(/\t|\n|\r/g, "");
 			theData =  theData.replace(/  /g, " ");
-			return theData.replace(htmlTag, replaceHTML);
+			theData = theData.replace(htmlTag, replaceHTML);
+			return theData;
 		}
 
 		private function replaceHTML(found:String, tag:String, index:int, other:int):String
@@ -149,18 +150,6 @@ package com.htmlFilter
 					}
 					lists.addItem(new htmlList(found));
 					currentList = lists.getItemAt(lists.length-1);
-					
-					var theOptions:ArrayCollection = optionAndStyles.findOptions(found);
-					
-					for each (var option:Array in theOptions)
-					{
-						switch (option.optionName)
-						{
-							case "doLineBreaks" :
-								currentList.doBr = Boolean(option.optionValue);
-								break;
-						}
-					}
 					return true;
 					break;
 				default :
@@ -217,7 +206,7 @@ package com.htmlFilter
 		
 		private function foundStartHeader (tag:String):Boolean
 		{
-			return tag.substr(0,1) == "h" && tag.length == 2;
+			return tag.charAt(0) == "h" && !isNaN(Number(tag.charAt(1)))
 		}
 		
 		private function foundEndHeader (tag:String):Boolean

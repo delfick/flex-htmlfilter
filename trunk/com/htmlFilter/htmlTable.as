@@ -23,7 +23,6 @@
 
 package com.htmlFilter
 {
-
 	import mx.containers.Canvas;
 	import flash.text.StyleSheet;
 	
