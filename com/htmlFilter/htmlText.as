@@ -24,8 +24,8 @@
 package com.htmlFilter
 {
 	import mx.containers.Canvas;
-	
-	
+
+
 	public class htmlText extends Canvas
 	{
 		import flash.events.Event;
@@ -42,85 +42,96 @@ package com.htmlFilter
     	import qs.controls.SuperImage;
     	import com.htmlFilter.optionAndStyles;
     	import com.htmlFilter.box;
-		
+
 		private var theParts:ArrayCollection = new ArrayCollection();
-		
+
 		private var currentPart:Number = 0;
-		
+
 		private var theText:String;
-		
+
 		private var customCss:Boolean = false;
-		
+
 		private var cssLoaded:Boolean = false;
-		
+
 		private var styles:StyleSheet;
-		
+
 		private var loader:URLLoader;
-		
+
 		public function htmlText ()
 		{
 			super();
-			
+
 			horizontalScrollPolicy="off";
-			
+
 			verticalScrollPolicy = "on";
-			
+
 			styles = optionAndStyles.getStyles();
 		}
-		
-        override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void 
+
+        override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
         {
             super.updateDisplayList(unscaledWidth, unscaledHeight);
-            
+
             if (numChildren == 0)
             {
-            	invalidateProperties() 
+            	if (theText != null)
+            	{
+            		invalidateProperties()
+            	}
             }
-    
-            var vm:EdgeMetrics = viewMetricsAndPadding;
-    
-            var yOfComp:Number = 0;
-            
-            var toX:Number;
-            
-            var obj:UIComponent;
-                
-            for (var i:int = 0; i < numChildren; i++)
+            else
             {
-                obj = UIComponent(getChildAt(i));
-                toX = obj.x;
-                if (theParts.getItemAt(i).Type == "table")
-                {
-                	toX = (width-obj.width-10)/2
-                }
-                else if (theParts.getItemAt(i).Type == "image")
-                {
-                	toX = (width-obj.width-10)/2
-                }
-                obj.move(toX, yOfComp);
-                yOfComp = yOfComp + obj.height;
-            }
-            
-            
+
+		        var vm:EdgeMetrics = viewMetricsAndPadding;
+
+		        var yOfComp:Number = 0;
+
+		        var toX:Number;
+
+		        var obj:UIComponent;
+
+		        for (var i:int = 0; i < numChildren; i++)
+		        {
+		            obj = UIComponent(getChildAt(i));
+		            toX = obj.x;
+		            if (theParts.getItemAt(i).Type == "table")
+		            {
+		            	toX = (width-obj.width-10)/2
+		            }
+		            else if (theParts.getItemAt(i).Type == "image")
+		            {
+		            	toX = (width-obj.width-10)/2
+		            }
+		            obj.move(toX, yOfComp);
+		            yOfComp = yOfComp + obj.height;
+		        }
+			}
+
+
         }
-        
+
         override protected function commitProperties():void
         {
-			findParts();
-			removeAllChildren();
-        	if (customCss)
+        	if (theText != null)
         	{
-        		if (cssLoaded)
-        		{
+				findParts();
+				removeAllChildren();
+		    	if (customCss)
+		    	{
+		    		if (cssLoaded)
+		    		{
+						addNewItems();
+					}
+				}
+				else
+				{
 					addNewItems();
 				}
 			}
-			else
-			{
-				addNewItems();
-			}      	
+			invalidateDisplayList();
+			
         }
-        
+
         private function addNewItems():void
         {
 		    for each (var part:Object in theParts)
@@ -143,16 +154,19 @@ package com.htmlFilter
 		    	}
 		    }
         }
-        
+
         private function findParts():void
         {
-        	theParts = new ArrayCollection();
-        	currentPart = -1;
-        	addItem("text", 0);
-        	var tags:RegExp = new RegExp("<(?P<tag>[^<>]*)>", "g");
+        	//The text must not be null before entering this function
+        	
+        	
+			theParts = new ArrayCollection();
+	    	currentPart = -1;
+	    	addItem("text", 0);
+	    	var tags:RegExp = new RegExp("<(?P<tag>[^<>]*)>", "g");
 			var result:Array = tags.exec(theText);
 			var prevPart:Object;
-				 
+
 			while (result != null)
 			{
 				if (result.tag.substr(0,5) == "table")
@@ -175,39 +189,33 @@ package com.htmlFilter
 				}
 				result = tags.exec(theText);
 			}
-			
+
 			prevPart = theParts.getItemAt(currentPart);
-			if (theText != null)
-			{
-				prevPart.Text = theText.substring(prevPart.startIndex, theText.length);
-			}
-			else
-			{
-				prevPart.Text = "This page is loading";
-			}
+			prevPart.Text = theText.substring(prevPart.startIndex, theText.length);
+			
         }
-        
+
         private function addNewItem(inType:String, inPart:Object):void
-        {        	
+        {
         	switch (inType)
         	{
 		    	case "text" :
-					var newTextField:com.htmlFilter.text = optionAndStyles.getHtmlText();		
+					var newTextField:com.htmlFilter.text = optionAndStyles.getHtmlText();
 					newTextField.htmlText = inPart.Text;
 				//	trace(inPart.Text);
-			
+
 					var newBox:box = new box(box.TEXT);
 					newBox.addChild(newTextField);
 					newTextField.styleSheet = styles;
 					addChild(newBox);
 					break;
-				
+
 				case "table" :
 					var newTable:htmlTable = new htmlTable(inPart, styles);
 					newTable.percentWidth = 80;
 					addChild(newTable);
 					break;
-				
+
 				case "image" :
 					var newImage:SuperImage = new SuperImage();
 					newImage.source = inPart.src;
@@ -222,7 +230,7 @@ package com.htmlFilter
 					break;
 			}
         }
-        
+
         private function addItem(inType:String, inIndex:Number, inTag:String = ""):void
         {
         	var newPart:Object;
@@ -236,7 +244,7 @@ package com.htmlFilter
 					theParts.addItem(newPart);
 					currentPart++;
 					break;
-				
+
 				case "table" :
 					newPart = new Object;
 					newPart.startIndex = inIndex;
@@ -245,13 +253,13 @@ package com.htmlFilter
 					theParts.addItem(newPart);
 					currentPart++;
 					break;
-				
+
 				case "image" :
 					var src:String = null;
 					var width:Number = -1;
 					var cacheName:String = "default";
 					newPart = new Object;
-					
+
 					var theOptions:ArrayCollection = optionAndStyles.findOptions(inTag);
 					for each (var option:Array in theOptions)
 					{
@@ -291,8 +299,8 @@ package com.htmlFilter
 			}
 
         }
-        
-		
+
+
 		[Bindable]
 		public function get text ():String
 		{
@@ -301,13 +309,13 @@ package com.htmlFilter
 		public function set text (inText:String):void
 		{
 			theText = inText;
-			invalidateProperties() 
+			invalidateProperties()
 		}
-		
+
 		public function set cssFile (inCssFile:String):void
 		{
 			customCss = true;
-			
+
 			var req:URLRequest = new URLRequest(inCssFile);
             loader = new URLLoader();
             loader.addEventListener(Event.COMPLETE, onCSSFileLoaded);
@@ -323,8 +331,8 @@ package com.htmlFilter
             {
                 trace("A SecurityError has occurred.");
             }
-		}		
-		
+		}
+
         public function onCSSFileLoaded(event:Event):void
         {
             styles = new StyleSheet();
@@ -332,7 +340,7 @@ package com.htmlFilter
             cssLoaded = true;
         }
 	}
-	
+
 }
 
 

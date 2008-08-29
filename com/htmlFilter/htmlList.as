@@ -55,7 +55,7 @@ package com.htmlFilter
 			starter = "";
 			theIndent = -30;
 			
-			if (inFound == "<ul>")
+			if (inFound.substr(1,2) == "ul")
 			{
 				theType = "ul";
 				ender = "";
@@ -87,6 +87,9 @@ package com.htmlFilter
 						break;
 					case "ender" :
 						ender = option.optionValue;
+						break;
+					case "doLineBreaks" :
+						doLineBreak = Boolean(option.optionValue);
 						break;
 				}
 			}
@@ -144,6 +147,7 @@ package com.htmlFilter
 			else
 			{
 				return starter + "•" + ender;
+				
 			}
 		}
 		
@@ -185,10 +189,6 @@ package com.htmlFilter
 		}
 		
 
-		public function set doBr (inDoBr:Boolean):void
-		{
-			doLineBreak = inDoBr;
-		}
 		public function get doBr ():Boolean
 		{
 			return doLineBreak;
