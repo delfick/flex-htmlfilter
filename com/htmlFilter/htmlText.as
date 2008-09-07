@@ -332,6 +332,13 @@ package com.htmlFilter
                 trace("A SecurityError has occurred.");
             }
 		}
+		
+		public function set css(style:StyleSheet):void
+		{
+			customCss = true;
+			styles = style;
+			cssLoaded = true;
+		}
 
         public function onCSSFileLoaded(event:Event):void
         {
