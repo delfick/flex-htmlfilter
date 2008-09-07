@@ -39,6 +39,11 @@ package com.htmlFilter
 		
 		private var doBr:Boolean;		
 		
+		public function htmlFilter ()
+		{
+			//dummy constructor to get rid of a warning in strict compiler mode
+		}
+		
 		public function filterContent(theData:String):String
 		{
 			indentLevel = 0;
