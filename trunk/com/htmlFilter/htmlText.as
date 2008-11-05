@@ -333,14 +333,14 @@ package com.htmlFilter
             }
 		}
 		
-		public function set css(style:StyleSheet):void
+		public function set css(inStyle:StyleSheet):void
 		{
 			customCss = true;
-			styles = style;
+			styles = inStyle;
 			cssLoaded = true;
 		}
 
-        public function onCSSFileLoaded(event:Event):void
+        private function onCSSFileLoaded(event:Event):void
         {
             styles = new StyleSheet();
             styles.parseCSS(loader.data);
