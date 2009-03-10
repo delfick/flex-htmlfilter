@@ -40,21 +40,8 @@ LIBDIRS		= \
 	$(ROOTDIR)/com \
 	$(ROOTDIR)/com/htmlFilter \
 	$(ROOTDIR)/com/htmlFilter/special \
-	$(ROOTDIR)/com/clubswa \
-	$(ROOTDIR)/com/clubswa/controller \
-	$(ROOTDIR)/com/clubswa/views \
-	$(ROOTDIR)/com/clubswa/views/skins \
-	$(ROOTDIR)/com/clubswa/views/parts \
-	$(ROOTDIR)/com/clubswa/views/parts/subMenu \
-	$(ROOTDIR)/com/clubswa/events \
-	$(ROOTDIR)/com/clubswa/model \
-	$(ROOTDIR)/com/editor \
-	$(ROOTDIR)/com/editor/controller \
-	$(ROOTDIR)/com/editor/events \
-	$(ROOTDIR)/com/editor/model \
 	$(ROOTDIR)/com/interactiveAlchemy\
 	$(ROOTDIR)/com/interactiveAlchemy/utils\
-	$(ROOTDIR)/com/components \
 	$(ROOTDIR)/qs \
 	$(ROOTDIR)/qs/utils \
 	$(ROOTDIR)/qs/controls \

@@ -66,11 +66,31 @@ a
 	
 }
 
+
+.h1
+{
+	fontFamily : verdana;
+	fontWeight: bold;
+	fontSize: 24;
+	leading: 10;
+	
+}
+
+
+.h2
+{
+	fontFamily : verdana;
+	fontWeight: bold;
+	fontSize: 21;
+	leading: 10;
+	
+}
+
 .h3
 {
 	fontFamily : verdana;
 	fontWeight: bold;
-	fontSize: 20;
+	fontSize: 18;
 	leading: 10;
 	
 }
