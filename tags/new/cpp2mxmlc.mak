@@ -27,6 +27,8 @@ INCDEPS = $(wildcard $(INCLUDES)/*.h) $(foreach dir,$(SRCDIRS),$(wildcard $(dir)
 # Make a model of CURDIR that's compatible with sed command line
 CURDIR.SED := $(subst /,\/,$(CURDIR))
 
+MXMLC	=mxmlc
+
 
 ##################################
 #
@@ -35,7 +37,7 @@ CURDIR.SED := $(subst /,\/,$(CURDIR))
 $(BIN)/$(TARGET): $(BIN) $(ASPATH) $(CPPFILTER) $(FILES.DAS) $(FILES.Dmxml) $(MakeDeps)
 	$(info Update binaries)
 ifdef prettyprint
-	mxmlc $(MXMLFLAGS) -o $@ $(ASPATH)/$(ASMAIN) 
+	$(MXMLC) $(MXMLFLAGS) -o $@ $(ASPATH)/$(ASMAIN) 
 else
 # Remove final target to flag its un-built status
 	-@rm -f $(BIN)/$(TARGET)
@@ -44,7 +46,7 @@ else
 # 2. -e (long spew) Force ProjectPath/$(SRCDIR)/ to ProjectPath/$(ASPATH)/
 # Mac/Linux/POSIX: Remove first -e "s/\\/\//g", if you like
 # Report error if the target does not exist.
-	-/usr/local/flex/bin/mxmlc $(MXMLFLAGS) -o $@ $(ASPATH)/$(ASMAIN) >errors 2>&1
+	$(MXMLC) $(MXMLFLAGS) -o $@ $(ASPATH)/$(ASMAIN) >errors 2>&1
 ifeq "$(OS)" "Windows_NT" 
 	$(SED) -e "s/\\/\//g" -e "s/$(CURDIR.SED)\/$(ASPATH)/$(CURDIR.SED)\/$(ROOTDIR)/I"  errors
 # Generates an error level if this fails
