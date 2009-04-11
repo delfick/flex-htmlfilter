@@ -86,7 +86,7 @@ endif
 #
 $(ASPATH): $(ROOTDIR)/*
 ifeq "$(OS)" "Windows_NT"
-	@xcopy /t /i /e "$(ROOTDIR)" "$(ASPATH)"
+	@xcopy /I /C /K /Y /R /E /D "$(ROOTDIR)" "$(ASPATH)"
 else
 	@-find $(ROOTDIR) -type d | $(SED) -n -e 's/^$(ROOTDIR)/$(ASPATH)/' -e '/\/\./!p' | grep -v $(ASSETDIR) | xargs mkdir
 	ln -s $(CURDIR)/$(ROOTDIR)/$(ASSETDIR) $(ASPATH) -f
