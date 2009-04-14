@@ -47,6 +47,8 @@ package com.htmlFilter
 		private var styles:StyleSheet;
 		private var theClass:String = null;
 		private var doReference:Boolean = false;
+		private var thePercentWidth:Number = 0;
+		private var theWidth:Number = 0;
 		
 		public function htmlTable (inInfo:Object, inStyles:StyleSheet, width:Number)
 		{
@@ -75,9 +77,14 @@ package com.htmlFilter
 					else
 					{
 						width = Number(theWidth);
+						percentWidth = 0;
 					}
 				}
 			}
+			
+			Width = width;
+			PercentWidth = percentWidth;
+			
 			theInfo = inInfo;
 			theInfo.Text = theInfo.Text.replace("</table>", "");
 			
@@ -92,7 +99,7 @@ package com.htmlFilter
             for each (var row:Object in theRows)
             {
             	row.fillCells();
-            	addChild(row.getDisplay(width));
+            	addChild(row.getDisplay(width, percentWidth));
             }
 			
     		var foundReference:Array = tagsAndOptions.findTag("reference", theInfo.Text);
@@ -155,7 +162,7 @@ package com.htmlFilter
 						prevPart = theRows.getItemAt(currentRow);
 						prevPart.Text = inText.substring(prevPart.StartIndex, result.index);
 					}
-					theRows.addItem(new htmlRow(result.index, styles));
+					theRows.addItem(new htmlRow(result.index, styles, Width, PercentWidth));
         			currentRow++;
 					
 				}
@@ -221,6 +228,9 @@ package com.htmlFilter
 			
 			addCaption(inCaption);
         }
+        
+        ppVarGetSet(Width,        theWidth,        Number);
+    	ppVarGetSet(PercentWidth, thePercentWidth, Number);
 	}
 }
 
@@ -251,16 +261,21 @@ class htmlRow extends EventDispatcher implements IEventDispatcher
 	private var theCells:ArrayCollection = new ArrayCollection;
 	private var currentCell:Number;
 	private var tClass:String = null;
+	
+	private var theWidth:Number;
+	private var thePercentWidth:Number;
 
-    public function htmlRow(inIndex:Number, inStyles:StyleSheet)
+    public function htmlRow(inIndex:Number, inStyles:StyleSheet, inWidth:Number, inPercentWidth:Number)
     {
     	theStartIndex = inIndex;
     	styles = inStyles;
     	theText = null;
     	numCells = 0;
+    	Width = inWidth;
+    	PercentWidth = inPercentWidth
     }
 
-    public function getDisplay(inWidth:Number):UIComponent
+    public function getDisplay():UIComponent
     {
 		var rowBox:box = new box(box.ROW);
 		if (TableClass != null)
@@ -269,10 +284,13 @@ class htmlRow extends EventDispatcher implements IEventDispatcher
 		}
 		
 		rowBox.theItems = theCells;
-		rowBox.NumItems = numCells;		
+		rowBox.NumItems = numCells;	
+		rowBox.Width = Width;
+		rowBox.PercentWidth = PercentWidth;
+			
 		for each (var cell:Object in theCells)
 		{
-			rowBox.addChild(cell.getDisplay(inWidth))
+			rowBox.addChild(cell.getDisplay())
 		}
 		return rowBox;
     }
@@ -351,9 +369,11 @@ class htmlRow extends EventDispatcher implements IEventDispatcher
     	findCells(inText);
     }
     
-    ppVarGetSet(StartIndex, theStartIndex, Number);
-    ppVarGetSet(TableClass, tClass, 	   String);
-    ppVarGet   (Text,       theText,       String);
+    ppVarGetSet(StartIndex,   theStartIndex,   Number);
+    ppVarGetSet(TableClass,   tClass, 	       String);
+    ppVarGetSet(Width,        theWidth,        Number);
+    ppVarGetSet(PercentWidth, thePercentWidth, Number);
+    ppVarGet   (Text,         theText,         String);
         
 }
 
@@ -388,7 +408,7 @@ class htmlCell extends EventDispatcher implements IEventDispatcher
     	tClass = inTableClass;
     }
     
-    public function getDisplay(inWidth:Number):UIComponent
+    public function getDisplay():UIComponent
     {
     	setOptions();
 		var tag:RegExp = new RegExp("<image[^>]+/>", "g");

@@ -44,7 +44,7 @@
 			{
 				var loader2:URLLoader = URLLoader(event.target);
 				defaultTxt = loader2.data;
-				raw.text = loader2.data;
+				//raw.text = loader2.data;
 				Txt = loader2.data;
 			}
 			
@@ -94,7 +94,7 @@
 			
 		</mx:VBox>
 	
-		<mx:VBox width="100%" height="100%" >
+		<!--mx:VBox width="100%" height="100%" >
 			<mx:TextArea text="Page loading, please wait" id="raw" width="95%" height="100%" />
 			<mx:HBox width="100%" horizontalAlign="center">
 				<mx:Button label="reset" click="{Txt = defaultTxt; raw.text = defaultTxt}"/>
@@ -104,7 +104,7 @@
 			<mx:HBox styleName="plain" width="100%">
 				<mx:Text htmlText="Source found at &lt;a href='http://flex-htmlFilter.googlecode.com'&gt;http://flex-htmlFilter.googlecode.com&lt;a/&gt;"/>
 			</mx:HBox>
-		</mx:VBox>
+		</mx:VBox-->
 	
 	</mx:HBox>
 	

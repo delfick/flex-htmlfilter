@@ -25,7 +25,7 @@
 	<li>even works for bulleted lists</li>
 </ul>
 
-<table>
+<table width="10">
 	<caption>Table 1</caption>
 	<reference>Reference : my imagination</reference>
 	<tr>
