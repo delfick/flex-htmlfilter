@@ -291,13 +291,13 @@ package com.htmlFilter
 						{
 							theWidth = 95;
 						}
-						var table:objectWrapper = new objectWrapper(inPart, styles, 0, theWidth, "table", totalWidth, vScroll);
+						var table:objectWrapper = new objectWrapper(inPart, styles, theWidth, "table", totalWidth, vScroll);
 						//newTable.percentWidth = 80;
 						addChild(table);
 						break;
 
 					case "image" :
-						var newImage:objectWrapper = new objectWrapper(inPart, styles, 0, 0, "image", totalWidth, vScroll);
+						var newImage:objectWrapper = new objectWrapper(inPart, styles, 0, "image", totalWidth, vScroll);
 						addChild(newImage);
 						break;
 					

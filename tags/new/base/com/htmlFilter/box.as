@@ -19,8 +19,6 @@
 //#  Foundation, Inc., 59 Temple Place, Suite 330,
 //#  Boston, MA 02111-1307, USA.
 
-#include "misc.h"
-
 package com.htmlFilter
 {
 	import flash.events.EventDispatcher;
@@ -44,8 +42,6 @@ package com.htmlFilter
 		
 		private var type:String;
 		private var numItems:Number;
-		private var theWidth:Number;
-		private var thePercentWidth:Number;
 		
 		public function box(inType:String=PLACE, width:Number=20, height:Number=100)
 		{
@@ -123,13 +119,7 @@ package com.htmlFilter
 		        
 		        	var colspan:Number;
 		        	var width:Number;
-		        	var widthLeft:Number
-		        	
-		        	thePercentWidth == 0
-		        	?
-		        		widthLeft = theWidth
-		        	:
-		        		widthLeft =  unscaledWidth * thePercentWidth;
+		        	var widthLeft:Number = unscaledWidth;
         
 					if (numChildren > numItems)
 					{
@@ -172,9 +162,5 @@ package com.htmlFilter
 		{
 			numItems = inNum;
 		}
-		
-		
-		ppVarGetSet(Width,        theWidth,        Number);
-		ppVarGetSet(PercentWidth, thePercentWidth, Number);
 	}
 }

@@ -42,44 +42,30 @@ package com.htmlFilter
 		private var endWidth:Number;
 		private var specialWidth:Number = 0;
 		private var totalWidth:Number;
-		private var thePercentWidth:Number;
-		private var theWidth:Number;
 		private var theType:String;
 		private var vScroll:String;
 		
-		public function objectWrapper (inPart:Object, inStyles:StyleSheet, inWidth:Number, 
-			inPercentWidth:Number, type:String, inTotalWidth:Number, hasVScroll:String)
+		public function objectWrapper (inPart:Object, inStyles:StyleSheet, inWidth:Number, type:String, inTotalWidth:Number, hasVScroll:String)
 		{
 			vScroll = hasVScroll
 			theType = type;
 			totalWidth = inTotalWidth;
-			thePercentWidth = inPercentWidth;
-			theWidth = inWidth;
-		
+			width = 604;
+			
 			var newObject:*;
 			
-			if (theWidth == 0 && thePercentWidth == 0)
+			if (inWidth == 0)
 			{
-				thePercentWidth = 95;
+				inWidth = 95;
 			}
-			else if (theWidth != 0 && thePercentWidth == 0)
-			{
-				thePercentWidth = theWidth/totalWidth
-			}
-			
-			if (theWidth == 0 && thePercentWidth != 0)
-			{
-				theWidth = inTotalWidth * (thePercentWidth / 100); 
-			}
-			
 			
 			if (inPart.width != null)
 			{
 				specialWidth = inPart.width;
 			}
 			
-			middleWidth = thePercentWidth;
-			boxWidth = (100-middleWidth)/2;
+			middleWidth = inWidth;
+			boxWidth = (100-inWidth)/2;
 			
 			var emptyBox1:box = new box(box.PLACE, boxWidth);
 		//	emptyBox1.setStyle("backgroundColor", "0xF56FFF");
@@ -90,7 +76,7 @@ package com.htmlFilter
 			switch (type)
 			{
 				case "table" :
-					newObject = new htmlTable(inPart, inStyles, width);
+					newObject = new htmlTable(inPart, inStyles, inWidth);
 					break;
 					
 				case "image" :
@@ -133,7 +119,6 @@ package com.htmlFilter
             
             if (numChildren == 3)
             {
-		       	
             	if (unscaledWidth > totalWidth && theType != "image")
             	{
             		theWidth = totalWidth;
@@ -142,9 +127,8 @@ package com.htmlFilter
 		        {
 		        	middleWidth = (specialWidth / theWidth) * 100;
 		        	boxWidth = (100-middleWidth)/2
-		      	}
+		        }
            	}
-           	
            	
            	
            	
@@ -165,10 +149,6 @@ package com.htmlFilter
             	middle = UIComponent(getChildAt(1));
             	end = UIComponent(getChildAt(2));
             	
-            	if (theWidth == 0)
-            	{
-            		theWidth = totalWidth;
-            	}
 	        	start.setActualSize(theWidth * (startWidth/100), middle.height);
 	        	start.move(0, 0);
 	        	
