@@ -286,12 +286,28 @@ package com.htmlFilter
 					case "table" :
 						var tableTag:Array = tagsAndOptions.findTagStart("table", inPart.Text);
 						var theClass:String = tagsAndOptions.getOption(tableTag.options, "class");
-						var theWidth:Number = 80;
+						var W:String = tagsAndOptions.getOption(tableTag.options, "width");
+						
+						var pw:Number = 80;
+												
+						if (W != null)
+						{
+							if (W.charAt(W.length-1) == "%")
+							{
+								pw = Number(W.slice(0, -1));
+							}
+							else
+							{
+								pw = (Number(W) / totalWidth) * 100;
+							}
+						}
+						
 						if (theClass == "question")
 						{
-							theWidth = 95;
+							pw = 95;
 						}
-						var table:objectWrapper = new objectWrapper(inPart, styles, theWidth, "table", totalWidth, vScroll);
+						
+						var table:objectWrapper = new objectWrapper(inPart, styles, pw, "table", totalWidth, vScroll);
 						//newTable.percentWidth = 80;
 						addChild(table);
 						break;

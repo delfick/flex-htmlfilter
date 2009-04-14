@@ -50,7 +50,9 @@ package com.htmlFilter
 			vScroll = hasVScroll
 			theType = type;
 			totalWidth = inTotalWidth;
-			width = 604;
+			width = inTotalWidth
+			
+			inWidth = inWidth;
 			
 			var newObject:*;
 			
