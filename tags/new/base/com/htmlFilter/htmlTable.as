@@ -99,7 +99,7 @@ package com.htmlFilter
             for each (var row:Object in theRows)
             {
             	row.fillCells();
-            	addChild(row.getDisplay(width, percentWidth));
+            	addChild(row.getDisplay());
             }
 			
     		var foundReference:Array = tagsAndOptions.findTag("reference", theInfo.Text);

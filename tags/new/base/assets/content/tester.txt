@@ -21,11 +21,11 @@
 	<li>you can specify anything to come before or after the numbers</li>
 </ol>
 
-<ul starter="..(" ender=")..">
+<ul starter="..(" ender=").."> 
 	<li>even works for bulleted lists</li>
 </ul>
 
-<table width="10">
+<table width="100">
 	<caption>Table 1</caption>
 	<reference>Reference : my imagination</reference>
 	<tr>
