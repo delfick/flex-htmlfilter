@@ -1,0 +1,149 @@
+================
+Implemented Tags
+================
+
+	<ul>
+		:ChildTags:
+			<li>
+			supports nested lists
+			
+	<ol>
+		:ChildTags:
+			<li>
+			supports nested lists
+		
+		:Attributes:
+			:type:
+				Values can be '1', 'a', 'A', 'i', 'I' and will change the type of numbering used by the list
+		
+	<table>
+		:ChildTags:
+			Tables can't be nested.
+			
+			<Caption>
+				will put the enclosed string at the top of the table in the middle.
+			<tr>
+				Starts a Row
+				
+				:ChildTags:
+					<td>
+						Starts a new cell in the row with style defined by "tableTD"
+						
+						:childTags:	
+							Anything except tables.
+							
+						:Attributes:
+							:colspan:
+								Says what width it should take up in terms of cells.
+						
+					<th>
+						Starts a new cell will style defined by "tableTH"
+						
+						:childTags:
+							Anything except tables.
+							
+						:Attributes:
+							:colspan:
+								Says what width it should take up in terms of cells.
+								
+	<hx>
+		where x is a number to specify the level of header
+		You must have a css class called "hx" (where x is the number for the header) defined for the header to be displayed differently to normal text.
+
+	
+	And any other tag already supported by the flash.text.htmlText.
+
+===========
+Custom Tags
+===========
+
+For the <table> tag
+	<Reference>
+		Creates a line below the table
+		
+		:ChildTags:
+			This tag doesn't support any childtags
+			
+		:Attributes:
+			:type:
+				Allows you to choose the type of reference. 
+				Options are "" or "webAddress"
+				If anything other than webAddress is defined as the type then it will only display what is defined by the Reference tag
+				If the type is webAdress, then it will display "Reference : <<link>>" where the link will point to what is defined by the Reference tag
+				
+			:showAs:
+				If it is of type "webAddress", then the reference will appear as a link with the text defined by showas
+				
+			An example would be 
+			<Reference type="webAddress" showAs"google">www.google.com</Reference>
+			Which will show the reference tag as "Reference : google" where google is a link that points to www.google.com.
+			
+<image>
+	Creates an image seperate to text and tables
+	
+	:ChildTags:
+		Has no child tags
+		
+	:Attrubutes:
+		:src: 
+			path to the image to be used
+		
+		:cache:
+			Cachename for the image
+			See SuperImage for more information on this
+			http://www.quietlyscheming.com/blog/2007/01/23/some-thoughts-on-doubt-on-flex-as-the-best-option-orhow-i-made-my-flex-images-stop-dancing/
+			A value of "null" will mean the image isn't cached.
+		
+		:width:
+			Specifies the width in pixels of the image.
+
+=================
+Custom Attributes
+=================
+
+For the <ul> and <ol> tags
+	:doLineBreaks: 
+		If "true" then there will be a line break between list items
+		If "false", there won't be a line break between list items
+		
+		Default is "false"
+	
+	:starter:
+		Defines what will appear before the numbering/bullets for the list
+		
+	:ender:
+		Defines what will appear before the numbering/bullets for the list
+		
+	An Example of starter and ender would be if you wanted every number/bullet in the list to be enclosed in brackets.
+	You would use <ol starter="(" ender=")"> ......
+	to result in
+		(1) ...
+		(2) ...
+		etc
+		
+For the <td> tag
+	:class:
+		Will use the css style as defined by "tableTD<<className>>" where <<className>> is the classname defined by the class attribute.		
+		
+For the <th> tag
+	:class:
+		Will use the css style as defined by "tableTH<<className>>" where <<className>> is the classname defined by the class attribute.
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
