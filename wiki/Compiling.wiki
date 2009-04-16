@@ -1,6 +1,7 @@
-#summary How to compile the preprocessed version in windows
+#summary How to compile the preprocessed version of flex-htmlfilter
+= Compiling under Windows =
 
-What is essentially the second version of flex-htmlfilter uses a project called [http://sourceforge.net/projects/flex2cpp flex2cpp] to provide preprocessing on the code.
+What is essentially the [http://code.google.com/p/flex-htmlfilter/source/browse/#svn/tags/new second version] of flex-htmlfilter uses a project called [http://sourceforge.net/projects/flex2cpp flex2cpp] to provide preprocessing on the code.
 
 Whilst I haven't used it much, it is in there and it would be a pain to create a version without it.
 
@@ -11,8 +12,6 @@ In most distributions of linux, the required software should be installed and al
 In Windows however, you first have to put in some effort.
 
 Fortunately most of the effort has been taken care of by the author of flex2cpp with an installation script that he has created.
-
-= Compiling under Windows =
 
 1. download this : http://sourceforge.net/project/downloading.php?group_id=193742&filename=installer103.zip&a=27834447 
 
