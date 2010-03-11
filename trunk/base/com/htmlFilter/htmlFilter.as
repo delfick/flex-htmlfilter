@@ -57,8 +57,8 @@ package com.htmlFilter
 			tagHistory = new ArrayCollection();
 	    	var htmlTag:RegExp = new RegExp("<(?P<tag>(/)?[^( )>]*)\s*(?P<extra>[^<>]*)>", "g");
 			knownClasses = inKnownClasses;
-			theData =  theData.replace(/\t|\n|\r/g, "");
-			theData =  theData.replace(/  /g, " ");
+			theData =  theData.replace(/\t|\n|\r| {4}/g, "");
+			theData =  theData.replace(/(?<![>\s])<(?!\/)/g, " <");
 			theData = theData.replace(htmlTag, replaceHTML);
 			return theData;
 		}
