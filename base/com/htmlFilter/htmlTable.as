@@ -187,7 +187,7 @@ package com.htmlFilter
 			newTextField.htmlText = "<span class='htmlTableCaption'>" + inCaption + "</span>";
 			cellBox.addChild(newTextField);
 			addChild(cellBox);
-			newTextField.styleSheet = styles;
+			newTextField.setStyleSheet(styles);
         }
         
         private function addReference(inCaption:String, inOptions:String):void
@@ -440,7 +440,7 @@ class htmlCell extends EventDispatcher implements IEventDispatcher
 		if (newImage == null || image == null)
 		{		
 			cellBox.addChild(newTextField);
-			newTextField.styleSheet = styles;
+			newTextField.setStyleSheet(styles);
 		}
 		else
 		{

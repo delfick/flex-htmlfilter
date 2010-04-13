@@ -1,7 +1,5 @@
 
 
-#include "misc.h"
-
 package com.htmlFilter
 {
     import mx.controls.Text;
@@ -16,7 +14,11 @@ package com.htmlFilter
             super();
         }
         
-        ppVarGetSet(styleSheet, textField.styleSheet, StyleSheet);
+        //it won't let me ovveride the setter for styleshhet
+        public function setStyleSheet (inVar:StyleSheet):void 
+        {
+           textField.styleSheet = inVar;
+        };
     }
 }
 
