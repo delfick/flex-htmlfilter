@@ -274,12 +274,15 @@ package com.htmlFilter
 						{
 							extraPadding = String(0);
 						}
-						ppCreatePaddedHtmlText(newTextField, Number(extraPadding))
-						newTextField.htmlText = inPart.Text;
+						ppCreatePaddedHtmlText(newTextField, Number(extraPadding));
+						
+	    	            var spaceAtStart:RegExp = new RegExp("^[^<]+");
+	    	            var useStr:String = inPart.Text.replace(spaceAtStart, "");
+						newTextField.htmlText = useStr;
 
 						var newBox:box = new box(box.TEXT);
 						newBox.addChild(newTextField);
-						newTextField.styleSheet = styles;
+						newTextField.setStyleSheet(styles);
 						addChild(newBox);
 						break;
 
