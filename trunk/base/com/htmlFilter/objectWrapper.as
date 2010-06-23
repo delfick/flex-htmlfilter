@@ -149,15 +149,22 @@ package com.htmlFilter
             {
             	start = UIComponent(getChildAt(0));
             	middle = UIComponent(getChildAt(1));
+            	
+            	var useHeight:Number = middle.height
+            	if (theType == "image") 
+            	{
+            	     useHeight = middle.measuredHeight;
+            	}
+            	
             	end = UIComponent(getChildAt(2));
             	
-	        	start.setActualSize(theWidth * (startWidth/100), middle.height);
+	        	start.setActualSize(theWidth * (startWidth/100), useHeight);
 	        	start.move(0, 0);
 	        	
-	        	middle.setActualSize(theWidth * (middleWidth/100), middle.height);
+	        	middle.setActualSize(theWidth * (middleWidth/100), useHeight);
 	        	middle.move(theWidth * (startWidth/100), 0);
 	        	
-	        	end.setActualSize(theWidth * (endWidth/100), middle.height);
+	        	end.setActualSize(theWidth * (endWidth/100), useHeight);
 	        	end.move(theWidth * ((startWidth+ middleWidth)/100), 0);
 		        
             }
