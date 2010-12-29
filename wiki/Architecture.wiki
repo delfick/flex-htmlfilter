@@ -3,8 +3,8 @@
 = Problems solved =
 
 There are two main problems solved by flex-htmlfilter:
-  * Html elements that can be faked using the built-in `<textformat>`
-  * Html elements that cannot be faked using the built-in `<textformat>`
+  * Html elements that can be faked using the built-in html tags
+  * Html elements that cannot be faked using the built-in html tags
 
 The first problem is solved with HtmlFilter, which will go through the html you give it and covert what it can, such that the resulting text can be used in a normal mx.controls.Text component and be able to display lists and headers correctly.
 
