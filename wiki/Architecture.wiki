@@ -1,4 +1,4 @@
-#How flex-htmlfilter works
+#A brief overview of how flex-htmlfilter works
 
 = Problems solved =
 
@@ -83,3 +83,35 @@ will convert into
     <textformat blockindent='120' indent='-20' tabstops='[120]'>•	there</textformat>
 </span></textformat></span></textformat></span>
 }}} 
+
+= How HtmlText works =
+
+Using the `commitProperties` and `updateDisplayList` functions that are called as part of Flex UIComponents (http://livedocs.adobe.com/flex/3/html/help.html?content=ascomponents_advanced_3.html), this component will vertically stack all of it's children.
+
+The children of the component are created after it has been supplied some html. It does this by looking through the html for tags and creating children as it goes.
+
+There are two phases to this process:
+  * Finding
+  * Adding
+  
+In the first phase (the `findParts` function), it will go through the provided text and add objects to a list, where each object represents a "part" of the canvas. It does this by looking for tags. When it finds one it knows about, it will set the Text of the previous part to the text that exists between the last tag and one it just found; followed by adding a new part for the tag it just found.
+
+In the second phase (the `addNewItems` function), it will go through all the parts and depending on the type of the part, it will add a new child to the canvas. Text parts are represented with a `com.htmlFilter.box` class with a `com.htmlFilter.Text` component inside (created using the `ppCreatePaddedHtmlText` macro as defined in `include/misc.h`); and tables & images are represented by a `com.htmlFilter.objectWrapper` class.
+
+= How ObjectWrapper works =
+
+The objectWrapper is used to put something in the middle.
+
+It works by making a box that contains three boxes, each next to each other. The first and last box are of the same width, and such that the sum of the widths of the boxes is the width of the parent container. The box in the middle has the object that is being wrapped.
+
+So, for example, say the object in the middle is a `com.htmlFilter.htmlTable` of width 20 and the width of the parent container (say a `com.htmlFilter.htmlText`) is 100, then the two boxes eitherside of the table will be 40 each.
+
+= How HtmlTable works =
+
+HtmlTable works in a similar way to HtmlText, except it finds rows and cells and uses the private classes as defined in `com.htmlFilter.htmlTable.as`.
+
+= Flexibility =
+
+Each of these things have a range of options and little things they do to ensure everything looks good. Unfortunately I don't have the time atm to fully explain all these things, but hopefully the above is enough to get you started in understanding the code when you read it.
+
+Have fun :)
