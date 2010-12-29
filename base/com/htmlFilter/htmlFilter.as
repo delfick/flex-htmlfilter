@@ -55,7 +55,7 @@ package com.htmlFilter
 			classHistory = new Array();
 			doBr = false;
 			tagHistory = new ArrayCollection();
-	    	var htmlTag:RegExp = new RegExp("<(?P<tag>(/)?[^( )>]*)\s*(?P<extra>[^<>]*)>", "g");
+	    	var htmlTag:RegExp = new RegExp("<(?P<tag>/?[^( )>]*)\s*(?P<extra>[^<>]*)>", "g");
 			knownClasses = inKnownClasses;
 			theData =  theData.replace(/\t|\n|\r| {4}/g, "");
 			theData =  theData.replace(/(?<![>\s])<(?!\/)/g, " <");
@@ -63,7 +63,7 @@ package com.htmlFilter
 			return theData;
 		}
 
-		private function replaceHTML(found:String, tag:String, extra:String, extra2:String, index:int, other:int):String
+		private function replaceHTML(found:String, tag:String, extra:String, index:int, other:int):String
 		{
 			var tagClass:String = tagsAndOptions.getOption(found, "class");
 			var theReturn:String = "";
@@ -81,8 +81,8 @@ package com.htmlFilter
 					classHistory.push([tag, tagClass]);
 					
 					var classAttr:RegExp = new RegExp("class=\"[^\"]+\"", "g");
-					extra2 = extra2.replace(classAttr, "");
-					theReturn = "<" + tagClass + " class=\"" + tag + "\"" + extra2 + ">";
+					extra = extra.replace(classAttr, "");
+					theReturn = "<" + tagClass + " class=\"" + tag + "\"" + extra + ">";
 				}
 				else
 				{
@@ -101,7 +101,7 @@ package com.htmlFilter
 					{
 						if (ppFoundStartHeader(tag))
 						{
-							theReturn = "<p class='" + tag.substr(0,2) + "'" + extra2 + ">";
+							theReturn = "<p class='" + tag.substr(0,2) + "'" + extra + ">";
 						}
 						else if (ppFoundEndHeader(tag))
 						{
