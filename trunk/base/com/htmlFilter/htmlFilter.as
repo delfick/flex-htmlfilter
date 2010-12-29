@@ -82,8 +82,6 @@ package com.htmlFilter
 					
 					var classAttr:RegExp = new RegExp("class=\"[^\"]+\"", "g");
 					extra2 = extra2.replace(classAttr, "");
-				//	debug.trace("pushed [" + tag + ", " + tagClass + "]");
-				//	debug.trace("<" + tagClass + " class=\"" + tag + "\">");
 					theReturn = "<" + tagClass + " class=\"" + tag + "\"" + extra2 + ">";
 				}
 				else

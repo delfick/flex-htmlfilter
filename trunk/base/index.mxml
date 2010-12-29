@@ -18,7 +18,7 @@
 		    import flash.net.URLRequest;
 		    
 		    [Bindable]
-			private var knownClasses:Object;
+			private var knownClasses:Object = new Object();
 		    
 			private var theText:String = "Page is loading, please wait";
 			
@@ -55,7 +55,7 @@
 			}
 			private function set Txt(inText:String):void
 			{
-				theText = theHtmlFilter.filterContent(inText);
+				theText = theHtmlFilter.filterContent(inText, knownClasses);
 			}
 			
 			private function seeBackImg(inEvent:Event):void
@@ -68,7 +68,6 @@
 			
 			public function addKnownClasses(inC:Array):void
 			{
-				knownClasses = new Object();
 				for each (var c:String in inC)
 				{
 					knownClasses[c] = true;
