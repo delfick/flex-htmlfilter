@@ -6,6 +6,7 @@
 # Flags to pass to MXML
 MXML_FLAGS=\
 	-use-network=false  \
+	-keep-as3-metadata+=Style \
 #	-metadata.creator='David Mace'\
 #	-metadata.description="Work in Progress"\
 #	-metadata.language="EN"\
