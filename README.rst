@@ -94,3 +94,138 @@ with an installation script that he has created.
 #. Open up a new cmd prompt, cd to where you have flex-htmlfilter and type "``make``"
    and it should magically work :)
 
+Implemented Tags
+----------------
+
+Flex htmlfilter supports any tag already supported by ``flash.text.htmlText``.
+It also supports the following:
+
+<ul>
+  Unordered list. These support ``<li>`` child tags and nested lists.
+
+<ol>
+  Ordered list. These support ``<li>`` child tags and nested lists.
+
+  They also have a ``type`` attribute whose value change the type of numbering
+  used by the list. Supported values are '1', 'a', 'A', 'i' and 'I'.
+
+<table>
+  Tables can't be nested.
+
+  They support ``<caption>`` and ``<tr>`` child tags.
+
+  <caption>
+    Will put the enclosed string at the top of the table in the middle
+
+  <tr>
+    Starts a new row
+
+    These support ``<td>`` and ``<th>`` child tags.
+
+    <td>
+      Starts a new cell in the row with a style defined by "tableTD".
+
+      They support any child tags except ``<table>``.
+
+      They support a ``colspan`` attribute which says what width it should
+      take in terms of number of cells.
+
+    <th>
+      Starts a new cell with a style defined by "tableTH".
+
+      It supports the same child tags and attributes as ``<td>``.
+
+<h``x``>
+  Where x is a number to specify the level of header
+
+  You must have a css class called "h``x``" defined for the header to be
+  displayed differently to normal text.
+
+Custom Tags
+-----------
+
+<Reference>
+  This can be used under a ``<table>`` and will create a line below the table.
+
+  It does not support any child tags.
+
+  It does support ``type`` and ``showas`` attributes.
+
+  ``type`` attribute
+    Allows you to choose the type of reference.
+
+    Options are "" or "webAddress"
+
+    If anything other than webAddress is defined as the type then it will only
+    display what is defined by the Reference tag
+
+    If the type is webAdress, then it will display "Reference : <<link>>" where
+    the link will point to what is defined by the Reference tag
+
+  ``showas`` attribute
+    If the type is "webAddress", then the reference will appear as a link
+    with the text defined by ``showas``.
+
+    An example would be::
+
+        <Reference type="webAddress" showAs"google">www.google.com</Reference>
+
+    Which will show the reference tag as "Reference : google" where google
+    is a link that points to www.google.com.
+
+<image>
+  Creates an image separate to text and tables.
+
+  It does not support any child tags.
+
+  It does support ``src``, ``cache`` and ``width`` attributes.
+
+  ``src`` attribute
+    Path to the image to be used.
+
+  ``cache`` attribute
+    Cache name for the image
+
+    See `SuperImage <http://www.quietlyscheming.com/blog/2007/01/23/some-thoughts-on-doubt-on-flex-as-the-best-option-orhow-i-made-my-flex-images-stop-dancing/>`_
+    for more information on this
+
+    A value of "null" will mean the image isn't cached.
+
+  ``width`` attribute
+    Specifies the width of the image in pixels.
+
+Custom Attributes
+-----------------
+
+For the <ul> and <ol> tags
+  doLineBreaks
+    If "true" then there will be a line break between list items.
+
+    If "false", there won't be a line break between list items.
+
+    Default is "false".
+
+  starter
+    Defines what will appear before the numbering/bullets for the list.
+
+  ender
+    Defines what will appear before the numbering/bullets for the list.
+
+  An Example of starter and ender would be if you wanted every number/bullet
+  in the list to be enclosed in brackets.
+
+  You would use <ol starter="(" ender=")"> to result in::
+
+      (1) ...
+      (2) ...
+
+For the <td> tag
+  class
+    Will use the css style as defined by "tableTD<<className>>"
+    where <<className>> is the classname defined by the class attribute.
+
+For the <th> tag
+  class
+    Will use the css style as defined by "tableTH<<className>>"
+    where <<className>> is the classname defined by the class attribute.
+
