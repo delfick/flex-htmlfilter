@@ -30,20 +30,20 @@ fields by enabling the use of:
 As well as this, it allows the use of some "custom" tags and some
 custom attributes of the above tags.
 
-An *old* (look below for the new one) interactive example can be found at
-http://stephen-m.appspot.com/htmlFilter
-(Note *this is the old version*, keep reading this page!)
+Demos
+-----
 
-New Version
+The new demo: http://stephen-m.appspot.com/htmlFilterNew
+
+The old demo: http://stephen-m.appspot.com/htmlFilter
+
+New version
 -----------
 
 Since April 16 2009, trunk contains a new version of flex-htmlfilter.
-Unfortunately I have little time to document what has been added and changed,
-however I do plan to do this in the future.
+Unfortunately I have little time to document what has been added and changed
 
 However, one major change is the use of preprocessing in the code.
-
-For now, an online demo can be found here http://stephen-m.appspot.com/htmlFilterNew
 
 Compiling Under Windows
 -----------------------
